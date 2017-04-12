@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/markdown-editor">
+        <file alias="split-hori">resources/images/split-hori.png</file>
+        <file alias="fullscreen">resources/images/fullscreen.png</file>
+    </qresource>
+    <qresource prefix="/markdown-editor">
+        <file alias="builtin-htmlpreview-themes.json">resources/builtin-htmlpreview-themes.json</file>
+    </qresource>
+</RCC>

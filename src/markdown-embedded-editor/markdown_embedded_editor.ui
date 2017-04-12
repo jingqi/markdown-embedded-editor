@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MarkdownEditor</class>
+ <widget class="QWidget" name="MarkdownEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>539</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QToolBar" name="toolbar">
+     <property name="windowTitle">
+      <string>toolbar</string>
+     </property>
+     <addaction name="action_preview"/>
+     <addaction name="action_fullscreen"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="widget_content" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="organic::MarkdownTextEditWrapper" name="textedit_markdown"/>
+        <widget class="organic::MarkdownViewerWrapper" name="viewer_markdown" native="true"/>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+  <action name="action_preview">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/markdown-editor/split-hori</normaloff>:/markdown-editor/split-hori</iconset>
+   </property>
+   <property name="text">
+    <string>预览</string>
+   </property>
+  </action>
+  <action name="action_fullscreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/markdown-editor/fullscreen</normaloff>:/markdown-editor/fullscreen</iconset>
+   </property>
+   <property name="text">
+    <string>全屏</string>
+   </property>
+   <property name="toolTip">
+    <string>全屏</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>organic::MarkdownTextEditWrapper</class>
+   <extends>QPlainTextEdit</extends>
+   <header>markdown_textedit_wrapper.h</header>
+  </customwidget>
+  <customwidget>
+   <class>organic::MarkdownViewerWrapper</class>
+   <extends>QWidget</extends>
+   <header>markdown_viewer_wrapper.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
