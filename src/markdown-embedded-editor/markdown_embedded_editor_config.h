@@ -2,14 +2,12 @@
 #ifndef ___HEADFILE_47D8C85A_BD86_497C_A65B_5D754D070A31_
 #define ___HEADFILE_47D8C85A_BD86_497C_A65B_5D754D070A31_
 
+#include <QtGlobal>
 
-#include <nut/platform/platform.h>
-
-#if defined(BUILDING_MARKDOWN_EDITOR_DLL)
-#   define MDE_API DLL_EXPORT
+#if defined(BUILDING_MARKDOWN_EMBEDDED_EDITOR_SHARED_LIB)
+#   define MDEE_API Q_DECL_EXPORT
 #else
-#   define MDE_API DLL_IMPORT
+#   define MDEE_API Q_DECL_IMPORT
 #endif
-
 
 #endif

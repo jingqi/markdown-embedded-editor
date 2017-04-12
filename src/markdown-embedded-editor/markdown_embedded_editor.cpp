@@ -1,6 +1,6 @@
 ﻿
-#include "markdown_editor.h"
-#include "ui_markdown_editor.h"
+#include "markdown_embedded_editor.h"
+#include "ui_markdown_embedded_editor.h"
 #include "view_synchronizer.h"
 #include "theme/theme.h"
 #include "theme/theme_collection.h"
@@ -10,8 +10,8 @@
 namespace organic
 {
 
-MarkdownEditor::MarkdownEditor(QWidget *parent)
-    : QWidget(parent), _ui(new Ui::MarkdownEditor), _theme_collection(new ThemeCollection)
+MarkdownEmbededEditor::MarkdownEmbededEditor(QWidget *parent)
+    : QWidget(parent), _ui(new Ui::MarkdownEmbededEditor), _theme_collection(new ThemeCollection)
 {
     _ui->setupUi(this);
     _ui->textedit_markdown->set_parent_editor(this);
@@ -32,7 +32,7 @@ MarkdownEditor::MarkdownEditor(QWidget *parent)
     connect(_ui->textedit_markdown->document(), SIGNAL(contentsChanged()),
             this, SLOT(textedit_text_changed()));
 
-#if !MARKDOWN_VIEWER_USE_QTWEBKIT
+#if WITH_QTWEBENGINE
     // XXX 当页面加载完成后，QWebEngineView 总是会夺取焦点，需要禁用
     connect(_ui->viewer_markdown, SIGNAL(loadFinished(bool)),
             this, SLOT(viewer_load_finished()));
@@ -50,44 +50,44 @@ MarkdownEditor::MarkdownEditor(QWidget *parent)
         _ui->action_fullscreen->setVisible(false);
 }
 
-MarkdownEditor::~MarkdownEditor()
+MarkdownEmbededEditor::~MarkdownEmbededEditor()
 {
     delete _theme_collection;
     delete _ui;
 }
 
-bool MarkdownEditor::canInsertFromMimeData(const QMimeData *source) const
+bool MarkdownEmbededEditor::canInsertFromMimeData(const QMimeData *source) const
 {
     return false;
 }
 
-void MarkdownEditor::insertFromMimeData(const QMimeData *source)
+void MarkdownEmbededEditor::insertFromMimeData(const QMimeData *source)
 {
     // default do nothing
 }
 
-QTextCursor MarkdownEditor::textCursor() const
+QTextCursor MarkdownEmbededEditor::textCursor() const
 {
     return _ui->textedit_markdown->textCursor();
 }
 
-QTextDocument* MarkdownEditor::document() const
+QTextDocument* MarkdownEmbededEditor::document() const
 {
     return _ui->textedit_markdown->document();
 }
 
-QString MarkdownEditor::post_process_html(const QString& html)
+QString MarkdownEmbededEditor::post_process_html(const QString& html)
 {
     return html;
 }
 
-void MarkdownEditor::textedit_text_changed()
+void MarkdownEmbededEditor::textedit_text_changed()
 {
     if (_ui->viewer_markdown->isVisible())
     {
         const QString text = _ui->textedit_markdown->toPlainText();
         _ui->viewer_markdown->set_markdown_content(text);
-#if !MARKDOWN_VIEWER_USE_QTWEBKIT
+#if WITH_QTWEBENGINE
         _ui->viewer_markdown->setEnabled(false);
 #endif
         _viewer_need_update = false;
@@ -100,20 +100,20 @@ void MarkdownEditor::textedit_text_changed()
     setWindowModified(_ui->textedit_markdown->document()->isModified());
 }
 
-#if !MARKDOWN_VIEWER_USE_QTWEBKIT
-void MarkdownEditor::viewer_load_finished()
+#if WITH_QTWEBENGINE
+void MarkdownEmbededEditor::viewer_load_finished()
 {
     _ui->viewer_markdown->setEnabled(true);
     _ui->textedit_markdown->setFocus();
 }
 #endif
 
-void MarkdownEditor::set_options(MarkdownViewerOptions *options)
+void MarkdownEmbededEditor::set_options(MarkdownViewerOptions *options)
 {
     _ui->viewer_markdown->set_options(options);
 }
 
-void MarkdownEditor::set_theme(const QString &theme)
+void MarkdownEmbededEditor::set_theme(const QString &theme)
 {
     _current_theme = _theme_collection->theme(theme);
 
@@ -127,25 +127,25 @@ void MarkdownEditor::set_theme(const QString &theme)
     _ui->viewer_markdown->set_theme_css_url(preview_stylesheet);
 }
 
-QString MarkdownEditor::markdown_textedit_style_path(const QString &name)
+QString MarkdownEmbededEditor::markdown_textedit_style_path(const QString &name)
 {
     const bool source_at_single_size = false;
     QString suffix = (source_at_single_size ? "" : "+");
     return QString(":/markdown-textedit/theme/%1%2.txt").arg(name).arg(suffix);
 }
 
-void MarkdownEditor::set_markdown_content(const QString &md)
+void MarkdownEmbededEditor::set_markdown_content(const QString &md)
 {
     _ui->textedit_markdown->setPlainText(md);
     _ui->viewer_markdown->set_markdown_content(md);
 }
 
-QString MarkdownEditor::get_markdown_content() const
+QString MarkdownEmbededEditor::get_markdown_content() const
 {
     return _ui->textedit_markdown->toPlainText();
 }
 
-void MarkdownEditor::show_preview()
+void MarkdownEmbededEditor::show_preview()
 {
     const bool visible = !_ui->viewer_markdown->isVisible();
     _ui->viewer_markdown->setVisible(visible);
@@ -155,7 +155,7 @@ void MarkdownEditor::show_preview()
         textedit_text_changed();
 }
 
-void MarkdownEditor::toggle_fullscreen()
+void MarkdownEmbededEditor::toggle_fullscreen()
 {
     Qt::WindowState new_state = (windowState() == Qt::WindowFullScreen ?
                                      Qt::WindowNoState : Qt::WindowFullScreen);

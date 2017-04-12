@@ -7,9 +7,7 @@
 #include <QTextCursor>
 #include <QTextDocument>
 
-#include <markdown-viewer/markdown_viewer_config.h>
-
-#include "markdown_editor_config.h"
+#include "markdown_embedded_editor_config.h"
 #include "theme/theme.h"
 
 namespace Ui {
@@ -23,7 +21,7 @@ class MarkdownViewerOptions;
 class ViewSynchronizer;
 class ThemeCollection;
 
-class MDE_API MarkdownEditor : public QWidget
+class MDEE_API MarkdownEmbeddedEditor : public QWidget
 {
     Q_OBJECT
 
@@ -35,8 +33,8 @@ class MDE_API MarkdownEditor : public QWidget
     Theme _current_theme { "Default", "Default", "Default", "Default" };
 
 public:
-    MarkdownEditor(QWidget *parent=NULL);
-    ~MarkdownEditor();
+    MarkdownEmbeddedEditor(QWidget *parent=NULL);
+    ~MarkdownEmbeddedEditor();
 
     void set_options(MarkdownViewerOptions *options);
     void set_theme(const QString& theme);
@@ -57,7 +55,7 @@ signals:
 
 private slots:
     void textedit_text_changed();
-#if !MARKDOWN_VIEWER_USE_QTWEBKIT
+#if WITH_QTWEBENGINE
     void viewer_load_finished();
 #endif
 

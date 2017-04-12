@@ -1,24 +1,20 @@
 
-TARGET = test-markdown-editor
+TARGET = test-markdown-embedded-editor
 TEMPLATE = app
 
-include(../../global.pri)
+include(../global.pri)
 
 QT += core gui
-greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets
-}
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-# FIXME 从 Qt5.6 开始， QWebKit 不再被默认支持，改为使用 QtWebEngine
-#       但是 Windows 下到 Qt5.7 为止，Mingw 尚不支持 QtWebEngine
-lessThan(QT_VERSION, 5.6) {
+qtHaveModule(webkitwidgets) {
     QT += webkitwidgets
+    DEFINES += WITH_QTWEBENGINE=0
+} else: qtHaveModule(webenginewidgets) {
+    QT += webenginewidgets webchannel
+    DEFINES += WITH_QTWEBENGINE=1
 } else {
-    win32 {
-        message(QtWebEngine not supported yet for mingw in Windows!)
-    } else {
-        QT += webenginewidgets webchannel
-    }
+    message(Neither QtWebEngine nor QtWebEngine found!)
 }
 
 # 头文件
@@ -38,35 +34,24 @@ OTHER_FILES += test.md
 
 # markdown-editor
 INCLUDEPATH += $$PWD/..
-LIBS += -L$$OUT_PWD/../markdown-editor$${OUT_TAIL}
-win32: LIBS += -lmarkdown-editor1
-else: LIBS += -lmarkdown-editor
-
-# nut
-INCLUDEPATH += $$PWD/../../../3rdparty/nut.git/src
-LIBS += -L$$OUT_PWD/../../../3rdparty/nut.git/proj/qtcreator/pro/nut$${OUT_TAIL}
-win32: LIBS += -lnut1
-else: LIBS += -lnut
+LIBS += -L$$OUT_PWD/../markdown-embedded-editor$${OUT_TAIL}
+win32: LIBS += -lmarkdown-embedded-editor1
+else: LIBS += -lmarkdown-embedded-editor
 
 # 资源打包
 mac {
     libs.path = Contents/Frameworks
     libs.files = \
-        $$OUT_PWD/../../../3rdparty/nut.git/proj/qtcreator/pro/nut/libnut.1.dylib \
         $$OUT_PWD/../discount/libdiscount.1.dylib \
         $$OUT_PWD/../hoedown/libhoedown.1.dylib \
         $$OUT_PWD/../markdown-textedit/libmarkdown-textedit.1.dylib \
         $$OUT_PWD/../markdown-viewer/libmarkdown-viewer.1.dylib \
-        $$OUT_PWD/../markdown-editor/libmarkdown-editor.1.dylib
+        $$OUT_PWD/../markdown-embedded-editor/libmarkdown-embedded-editor.1.dylib
     QMAKE_BUNDLE_DATA += libs
 } else: win32 {
     # 拷贝资源文件
-    SRC = $$OUT_PWD/../../../3rdparty/nut.git/proj/qtcreator/pro/nut/$${DEBUG_MODE}/nut1.dll
-    POST_TARGETDEPS += $${SRC}
-    SRC ~= s,/,\\,g
     DST = $$OUT_PWD/$${DEBUG_MODE}
     DST ~= s,/,\\,g
-    QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 
     SRC = $$OUT_PWD/../discount/$${DEBUG_MODE}/discount.dll
     POST_TARGETDEPS += $${SRC}
@@ -88,15 +73,11 @@ mac {
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 
-    SRC = $$OUT_PWD/../markdown-editor/$${DEBUG_MODE}/markdown-editor1.dll
+    SRC = $$OUT_PWD/../markdown-embedded-editor/$${DEBUG_MODE}/markdown-embedded-editor1.dll
     POST_TARGETDEPS += $${SRC}
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 } else: unix {
-    SRC = $$OUT_PWD/../../../3rdparty/nut.git/proj/qtcreator/pro/nut/libnut.1.so
-    POST_TARGETDEPS += $${SRC}
-    QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
-
     SRC = $$OUT_PWD/../discount/libdiscount.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
@@ -113,7 +94,7 @@ mac {
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 
-    SRC = $$OUT_PWD/../markdown-editor/libmarkdown-editor.1.so
+    SRC = $$OUT_PWD/../markdown-embedded-editor/libmarkdown-embedded-editor.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 }
