@@ -4,7 +4,6 @@
 
 #include <QObject>
 
-#include <markdown-viewer/markdown_viewer_config.h>
 
 namespace organic
 {
@@ -26,10 +25,10 @@ public slots:
     void textedit_scrolled();
 
     // This slot is called from JS
-#if MARKDOWN_VIEWER_USE_QTWEBKIT
-    void viewer_scrolled();
-#else
+#if WITH_QTWEBENGINE
     void viewer_scrolled(double percent);
+#else
+    void viewer_scrolled();
 #endif
 
 private slots:

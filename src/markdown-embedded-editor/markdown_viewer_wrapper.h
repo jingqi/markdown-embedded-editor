@@ -2,7 +2,7 @@
 #ifndef ___HEADFILE_8AC25BD6_22FC_42ED_A7CB_3329B6E452A7_
 #define ___HEADFILE_8AC25BD6_22FC_42ED_A7CB_3329B6E452A7_
 
-#include <markdown-viewer/markdown_viewer.h>
+#include <markdown_viewer.h>
 
 
 namespace organic

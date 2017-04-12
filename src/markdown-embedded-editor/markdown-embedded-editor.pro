@@ -39,7 +39,8 @@ win32: LIBS += -lmarkdown-textedit1
 else: LIBS += -lmarkdown-textedit
 
 # markdown-viewer
-LIBS += -L$$OUT_PWD/../markdown-viewer$${OUT_TAIL}
+INCLUDEPATH += $$PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer
+LIBS += -L$$OUT_PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer$${OUT_TAIL}
 win32: LIBS += -lmarkdown-viewer1
 else: LIBS += -lmarkdown-viewer
 
