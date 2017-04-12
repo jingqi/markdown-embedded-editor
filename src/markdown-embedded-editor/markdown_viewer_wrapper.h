@@ -8,18 +8,18 @@
 namespace organic
 {
 
-class MarkdownEditor;
+class MarkdownEmbeddedEditor;
 
 class MarkdownViewerWrapper : public MarkdownViewer
 {
     Q_OBJECT
 
-    MarkdownEditor *_parent_editor = NULL;
+    MarkdownEmbeddedEditor *_parent_editor = NULL;
 
 public:
    MarkdownViewerWrapper(QWidget *parent);
 
-   void set_parent_editor(MarkdownEditor *editor);
+   void set_parent_editor(MarkdownEmbeddedEditor *editor);
 
 protected:
    virtual QString post_process_html(const QString& html) override;

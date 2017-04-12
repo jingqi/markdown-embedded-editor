@@ -8,18 +8,18 @@
 namespace organic
 {
 
-class MarkdownEditor;
+class MarkdownEmbeddedEditor;
 
 class MarkdownTextEditWrapper : public MarkdownTextEdit
 {
     Q_OBJECT
 
-    MarkdownEditor *_parent_editor = NULL;
+    MarkdownEmbeddedEditor *_parent_editor = NULL;
 
 public:
     MarkdownTextEditWrapper(QWidget *parent);
 
-    void set_parent_editor(MarkdownEditor *editor);
+    void set_parent_editor(MarkdownEmbeddedEditor *editor);
 
 protected:
     virtual bool canInsertFromMimeData(const QMimeData *source) const override;

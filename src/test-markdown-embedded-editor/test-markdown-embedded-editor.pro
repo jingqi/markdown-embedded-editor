@@ -32,20 +32,23 @@ RESOURCES += $$files(*.qrc, true)
 # 其他文件
 OTHER_FILES += test.md
 
-# markdown-editor
-INCLUDEPATH += $$PWD/..
+# markdown-embedded-editor
+INCLUDEPATH += $$PWD/../markdown-embedded-editor
 LIBS += -L$$OUT_PWD/../markdown-embedded-editor$${OUT_TAIL}
 win32: LIBS += -lmarkdown-embedded-editor1
 else: LIBS += -lmarkdown-embedded-editor
+
+# markdown-viewer
+INCLUDEPATH += $$PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer
 
 # 资源打包
 mac {
     libs.path = Contents/Frameworks
     libs.files = \
-        $$OUT_PWD/../discount/libdiscount.1.dylib \
-        $$OUT_PWD/../hoedown/libhoedown.1.dylib \
-        $$OUT_PWD/../markdown-textedit/libmarkdown-textedit.1.dylib \
-        $$OUT_PWD/../markdown-viewer/libmarkdown-viewer.1.dylib \
+        $$OUT_PWD/../../3rdparty/markdown-textedit.git/src/markdown-textedit/libmarkdown-textedit.1.dylib \
+        $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/discount/libdiscount.1.dylib \
+        $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/hoedown/libhoedown.1.dylib \
+        $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer/libmarkdown-viewer.1.dylib \
         $$OUT_PWD/../markdown-embedded-editor/libmarkdown-embedded-editor.1.dylib
     QMAKE_BUNDLE_DATA += libs
 } else: win32 {
@@ -53,22 +56,22 @@ mac {
     DST = $$OUT_PWD/$${DEBUG_MODE}
     DST ~= s,/,\\,g
 
-    SRC = $$OUT_PWD/../discount/$${DEBUG_MODE}/discount.dll
+    SRC = $$OUT_PWD/../../3rdparty/markdown-textedit.git/src/markdown-textedit/$${DEBUG_MODE}/markdown-textedit1.dll
     POST_TARGETDEPS += $${SRC}
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 
-    SRC = $$OUT_PWD/../hoedown/$${DEBUG_MODE}/hoedown.dll
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/discount/$${DEBUG_MODE}/discount.dll
     POST_TARGETDEPS += $${SRC}
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 
-    SRC = $$OUT_PWD/../markdown-textedit/$${DEBUG_MODE}/markdown-textedit1.dll
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/hoedown/$${DEBUG_MODE}/hoedown.dll
     POST_TARGETDEPS += $${SRC}
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 
-    SRC = $$OUT_PWD/../markdown-viewer/$${DEBUG_MODE}/markdown-viewer1.dll
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer/$${DEBUG_MODE}/markdown-viewer1.dll
     POST_TARGETDEPS += $${SRC}
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
@@ -78,19 +81,19 @@ mac {
     SRC ~= s,/,\\,
     QMAKE_POST_LINK += $$quote(cmd /c xcopy /y /i $${SRC} $${DST}$$escape_expand(\n\t))
 } else: unix {
-    SRC = $$OUT_PWD/../discount/libdiscount.1.so
+    SRC = $$OUT_PWD/../../3rdparty/markdown-textedit.git/src/markdown-textedit/libmarkdown-textedit.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 
-    SRC = $$OUT_PWD/../hoedown/libhoedown.1.so
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/discount/libdiscount.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 
-    SRC = $$OUT_PWD/../markdown-textedit/libmarkdown-textedit.1.so
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/hoedown/libhoedown.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 
-    SRC = $$OUT_PWD/../markdown-viewer/libmarkdown-viewer.1.so
+    SRC = $$OUT_PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer/libmarkdown-viewer.1.so
     POST_TARGETDEPS += $${SRC}
     QMAKE_POST_LINK += cp -Lf $${SRC} $$OUT_PWD/ ;
 

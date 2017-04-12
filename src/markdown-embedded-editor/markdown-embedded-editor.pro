@@ -45,4 +45,4 @@ win32: LIBS += -lmarkdown-viewer1
 else: LIBS += -lmarkdown-viewer
 
 # jsonconfig
-INCLUDEPATH += $$PWD/../../../3rdparty/jsonconfig
+INCLUDEPATH += $$PWD/../../3rdparty/jsonconfig

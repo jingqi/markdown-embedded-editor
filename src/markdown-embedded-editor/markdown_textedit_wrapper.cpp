@@ -2,7 +2,7 @@
 #include <assert.h>
 
 #include "markdown_textedit_wrapper.h"
-#include "markdown_editor.h"
+#include "markdown_embedded_editor.h"
 
 
 namespace organic
@@ -14,7 +14,7 @@ MarkdownTextEditWrapper::MarkdownTextEditWrapper(QWidget *parent)
     assert(NULL != parent);
 }
 
-void MarkdownTextEditWrapper::set_parent_editor(MarkdownEditor *editor)
+void MarkdownTextEditWrapper::set_parent_editor(MarkdownEmbeddedEditor *editor)
 {
     assert(NULL != editor);
     _parent_editor = editor;

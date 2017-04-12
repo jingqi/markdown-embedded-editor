@@ -3,8 +3,8 @@
 
 #include <QScrollBar>
 
-#include <markdown-textedit/markdown_textedit.h>
-#include <markdown-viewer/markdown_viewer.h>
+#include <markdown_textedit.h>
+#include <markdown_viewer.h>
 
 #if WITH_QTWEBENGINE
 #   include <QWebChannel>

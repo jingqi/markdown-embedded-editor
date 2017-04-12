@@ -11,7 +11,7 @@
 #include "theme/theme.h"
 
 namespace Ui {
-class MarkdownEditor;
+class MarkdownEmbeddedEditor;
 }
 
 namespace organic
@@ -25,7 +25,7 @@ class MDEE_API MarkdownEmbeddedEditor : public QWidget
 {
     Q_OBJECT
 
-    Ui::MarkdownEditor *_ui = NULL;
+    Ui::MarkdownEmbeddedEditor *_ui = NULL;
     ViewSynchronizer *_view_synchronizer = NULL;
     bool _viewer_need_update = false;
 
