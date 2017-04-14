@@ -1,6 +1,6 @@
 [submodule "3rdparty/markdown-textedit.git"]
 	path = 3rdparty/markdown-textedit.git
 	url = https://github.com/jingqi/markdown-textedit.git
-[submodule "3rdparty/markdown-viewer.git"]
-	path = 3rdparty/markdown-viewer.git
-	url = https://github.com/jingqi/markdown-viewer.git
+[submodule "3rdparty/markdown-view.git"]
+	path = 3rdparty/markdown-view.git
+	url = https://github.com/jingqi/markdown-view.git
