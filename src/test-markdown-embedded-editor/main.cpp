@@ -4,9 +4,10 @@
 #include <QIODevice>
 
 #include <markdown_embedded_editor.h>
-#include <markdown_viewer_options.h>
+#include <markdown_view_options.h>
 
-using namespace organic;
+using namespace mdview;
+using namespace mdee;
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
     QString all = f.readAll();
 
     MarkdownEmbeddedEditor w;
-    MarkdownViewerOptions options;
+    MarkdownViewOptions options;
     w.set_options(&options);
     w.set_theme("Solarized Light");
     w.set_markdown_content(all);

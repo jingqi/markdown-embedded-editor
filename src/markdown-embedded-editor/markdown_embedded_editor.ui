@@ -31,8 +31,8 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <widget class="organic::MarkdownTextEditWrapper" name="textedit_markdown"/>
-        <widget class="organic::MarkdownViewerWrapper" name="viewer_markdown" native="true"/>
+        <widget class="mdee::MarkdownTextEditWrapper" name="textedit_markdown"/>
+        <widget class="mdee::MarkdownViewWrapper" name="view_markdown" native="true"/>
        </widget>
       </item>
      </layout>
@@ -75,14 +75,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>organic::MarkdownTextEditWrapper</class>
+   <class>mdee::MarkdownTextEditWrapper</class>
    <extends>QPlainTextEdit</extends>
    <header>markdown_textedit_wrapper.h</header>
   </customwidget>
   <customwidget>
-   <class>organic::MarkdownViewerWrapper</class>
+   <class>mdee::MarkdownViewWrapper</class>
    <extends>QWidget</extends>
-   <header>markdown_viewer_wrapper.h</header>
+   <header>markdown_view_wrapper.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

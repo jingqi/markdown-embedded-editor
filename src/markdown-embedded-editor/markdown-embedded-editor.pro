@@ -38,11 +38,11 @@ LIBS += -L$$OUT_PWD/../../3rdparty/markdown-textedit.git/src/markdown-textedit$$
 win32: LIBS += -lmarkdown-textedit1
 else: LIBS += -lmarkdown-textedit
 
-# markdown-viewer
-INCLUDEPATH += $$PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer
-LIBS += -L$$OUT_PWD/../../3rdparty/markdown-viewer.git/src/markdown-viewer$${OUT_TAIL}
-win32: LIBS += -lmarkdown-viewer1
-else: LIBS += -lmarkdown-viewer
+# markdown-view
+INCLUDEPATH += $$PWD/../../3rdparty/markdown-view.git/src/markdown-view
+LIBS += -L$$OUT_PWD/../../3rdparty/markdown-view.git/src/markdown-view$${OUT_TAIL}
+win32: LIBS += -lmarkdown-view1
+else: LIBS += -lmarkdown-view
 
 # jsonconfig
 INCLUDEPATH += $$PWD/../../3rdparty/jsonconfig

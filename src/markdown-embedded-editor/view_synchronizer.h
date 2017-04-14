@@ -4,35 +4,41 @@
 
 #include <QObject>
 
-
-namespace organic
+namespace mdtextedit
 {
-
 class MarkdownTextEdit;
-class MarkdownViewer;
+}
+
+namespace mdview
+{
+class MarkdownView;
+}
+
+namespace mdee
+{
 
 class ViewSynchronizer : public QObject
 {
     Q_OBJECT
 
-    MarkdownTextEdit *_textedit = NULL;
-    MarkdownViewer *_viewer = NULL;
+    mdtextedit::MarkdownTextEdit *_textedit = NULL;
+    mdview::MarkdownView *_view = NULL;
 
 public:
-    ViewSynchronizer(MarkdownTextEdit *textedit, MarkdownViewer *viewer, QObject *parent);
+    ViewSynchronizer(mdtextedit::MarkdownTextEdit *textedit, mdview::MarkdownView *view, QObject *parent);
 
 public slots:
     void textedit_scrolled();
 
     // This slot is called from JS
 #if WITH_QTWEBENGINE
-    void viewer_scrolled(double percent);
+    void view_scrolled(double percent);
 #else
-    void viewer_scrolled();
+    void view_scrolled();
 #endif
 
 private slots:
-    void viewer_content_size_changed();
+    void view_content_size_changed();
     void add_javascript_object();
 };
 

@@ -1,11 +1,11 @@
-
+﻿
 #ifndef ___HEADFILE_273EBD21_0961_4491_A969_0D3070DD5965_
 #define ___HEADFILE_273EBD21_0961_4491_A969_0D3070DD5965_
 
 #include <QString>
 #include <stdexcept>
 
-namespace organic
+namespace mdee
 {
 
 class Theme

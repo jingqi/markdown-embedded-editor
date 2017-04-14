@@ -1,4 +1,4 @@
-
+﻿
 #ifndef ___HEADFILE_4A6EA914_93C0_4495_AE67_07E99B190185_
 #define ___HEADFILE_4A6EA914_93C0_4495_AE67_07E99B190185_
 
@@ -7,7 +7,7 @@
 #include <jsoncollection.h>
 #include "theme.h"
 
-namespace organic
+namespace mdee
 {
 
 class ThemeCollection : public JsonCollection<Theme>

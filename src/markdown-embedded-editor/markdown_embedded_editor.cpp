@@ -7,7 +7,7 @@
 #include "theme/style_manager.h"
 
 
-namespace organic
+namespace mdee
 {
 
 MarkdownEmbeddedEditor::MarkdownEmbeddedEditor(QWidget *parent)
@@ -15,7 +15,7 @@ MarkdownEmbeddedEditor::MarkdownEmbeddedEditor(QWidget *parent)
 {
     _ui->setupUi(this);
     _ui->textedit_markdown->set_parent_editor(this);
-    _ui->viewer_markdown->set_parent_editor(this);
+    _ui->view_markdown->set_parent_editor(this);
 
     // Balence the splitter
     QList<int> sizes;
@@ -34,12 +34,12 @@ MarkdownEmbeddedEditor::MarkdownEmbeddedEditor(QWidget *parent)
 
 #if WITH_QTWEBENGINE
     // XXX 当页面加载完成后，QWebEngineView 总是会夺取焦点，需要禁用
-    connect(_ui->viewer_markdown, SIGNAL(loadFinished(bool)),
+    connect(_ui->view_markdown, SIGNAL(loadFinished(bool)),
             this, SLOT(viewer_load_finished()));
 #endif
 
     // Synchronizer
-    _view_synchronizer = new ViewSynchronizer(_ui->textedit_markdown, _ui->viewer_markdown, this);
+    _view_synchronizer = new ViewSynchronizer(_ui->textedit_markdown, _ui->view_markdown, this);
 
     // Actions
     connect(_ui->action_preview, SIGNAL(triggered(bool)),
@@ -83,12 +83,12 @@ QString MarkdownEmbeddedEditor::post_process_html(const QString& html)
 
 void MarkdownEmbeddedEditor::textedit_text_changed()
 {
-    if (_ui->viewer_markdown->isVisible())
+    if (_ui->view_markdown->isVisible())
     {
         const QString text = _ui->textedit_markdown->toPlainText();
-        _ui->viewer_markdown->set_markdown_content(text);
+        _ui->view_markdown->set_markdown_content(text);
 #if WITH_QTWEBENGINE
-        _ui->viewer_markdown->setEnabled(false);
+        _ui->view_markdown->setEnabled(false);
 #endif
         _viewer_need_update = false;
     }
@@ -103,14 +103,14 @@ void MarkdownEmbeddedEditor::textedit_text_changed()
 #if WITH_QTWEBENGINE
 void MarkdownEmbeddedEditor::viewer_load_finished()
 {
-    _ui->viewer_markdown->setEnabled(true);
+    _ui->view_markdown->setEnabled(true);
     _ui->textedit_markdown->setFocus();
 }
 #endif
 
-void MarkdownEmbeddedEditor::set_options(MarkdownViewerOptions *options)
+void MarkdownEmbeddedEditor::set_options(mdview::MarkdownViewOptions *options)
 {
-    _ui->viewer_markdown->set_options(options);
+    _ui->view_markdown->set_options(options);
 }
 
 void MarkdownEmbeddedEditor::set_theme(const QString &theme)
@@ -123,8 +123,8 @@ void MarkdownEmbeddedEditor::set_theme(const QString &theme)
 
     _ui->textedit_markdown->load_style_from_stylesheet(
                 markdown_textedit_style_path(markdown_highlighting));
-    _ui->viewer_markdown->set_code_highlighting_style(code_highlighting);
-    _ui->viewer_markdown->set_theme_css_url(preview_stylesheet);
+    _ui->view_markdown->set_code_highlighting_style(code_highlighting);
+    _ui->view_markdown->set_theme_css_url(preview_stylesheet);
 }
 
 QString MarkdownEmbeddedEditor::markdown_textedit_style_path(const QString &name)
@@ -137,7 +137,7 @@ QString MarkdownEmbeddedEditor::markdown_textedit_style_path(const QString &name
 void MarkdownEmbeddedEditor::set_markdown_content(const QString &md)
 {
     _ui->textedit_markdown->setPlainText(md);
-    _ui->viewer_markdown->set_markdown_content(md);
+    _ui->view_markdown->set_markdown_content(md);
 }
 
 QString MarkdownEmbeddedEditor::get_markdown_content() const
@@ -147,8 +147,8 @@ QString MarkdownEmbeddedEditor::get_markdown_content() const
 
 void MarkdownEmbeddedEditor::show_preview()
 {
-    const bool visible = !_ui->viewer_markdown->isVisible();
-    _ui->viewer_markdown->setVisible(visible);
+    const bool visible = !_ui->view_markdown->isVisible();
+    _ui->view_markdown->setVisible(visible);
     _ui->action_preview->setChecked(visible);
 
     if (visible && _viewer_need_update)

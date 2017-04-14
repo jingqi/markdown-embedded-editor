@@ -9,12 +9,12 @@
 #include "json_theme_translator.h"
 
 template <>
-class JsonTranslatorFactory<organic::Theme>
+class JsonTranslatorFactory<mdee::Theme>
 {
 public:
-    static JsonTranslator<organic::Theme> *create()
+    static JsonTranslator<mdee::Theme> *create()
     {
-        return new organic::JsonThemeTranslator();
+        return new mdee::JsonThemeTranslator();
     }
 };
 

@@ -22,7 +22,7 @@
 #include <jsonfile.h>
 #include "json_theme_translator_factory.h"
 
-namespace organic
+namespace mdee
 {
 
 bool ThemeCollection::load(const QString &fileName)

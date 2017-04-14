@@ -19,7 +19,7 @@
 #include <QMap>
 
 
-namespace organic
+namespace mdee
 {
 
 static const QMap<QString, QString> BUILTIN_MARKDOWN_HIGHLIGHTINGS = {

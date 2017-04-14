@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2015 Christian Loose <christian.loose@hamburg.de>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  */
 #include "theme.h"
 
-namespace organic
+namespace mdee
 {
 
 Theme::Theme(const QString &name,

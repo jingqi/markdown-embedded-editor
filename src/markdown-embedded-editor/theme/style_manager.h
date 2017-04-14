@@ -1,4 +1,4 @@
-
+﻿
 #ifndef ___HEADFILE_D228F9CD_D466_4235_AF30_24238FAE696D_
 #define ___HEADFILE_D228F9CD_D466_4235_AF30_24238FAE696D_
 
@@ -6,7 +6,7 @@
 #include <QString>
 #include "theme.h"
 
-namespace organic
+namespace mdee
 {
 
 class StyleManager

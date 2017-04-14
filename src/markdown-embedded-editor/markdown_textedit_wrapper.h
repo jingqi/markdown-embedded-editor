@@ -1,16 +1,16 @@
-
+﻿
 #ifndef ___HEADFILE_EC7146B1_FBB9_44C7_AA75_84EE274EE145_
 #define ___HEADFILE_EC7146B1_FBB9_44C7_AA75_84EE274EE145_
 
 #include <markdown_textedit.h>
 
 
-namespace organic
+namespace mdee
 {
 
 class MarkdownEmbeddedEditor;
 
-class MarkdownTextEditWrapper : public MarkdownTextEdit
+class MarkdownTextEditWrapper : public mdtextedit::MarkdownTextEdit
 {
     Q_OBJECT
 

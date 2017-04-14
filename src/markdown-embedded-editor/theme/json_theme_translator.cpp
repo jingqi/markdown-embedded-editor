@@ -26,7 +26,7 @@ static const QLatin1String BUILT_IN("builtIn");
 
 }
 
-namespace organic
+namespace mdee
 {
 
 Theme JsonThemeTranslator::fromJsonObject(const QJsonObject &object)

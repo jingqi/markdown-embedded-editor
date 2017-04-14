@@ -10,14 +10,19 @@
 #include "markdown_embedded_editor_config.h"
 #include "theme/theme.h"
 
-namespace Ui {
+namespace Ui
+{
 class MarkdownEmbeddedEditor;
 }
 
-namespace organic
+namespace mdview
+{
+class MarkdownViewOptions;
+}
+
+namespace mdee
 {
 
-class MarkdownViewerOptions;
 class ViewSynchronizer;
 class ThemeCollection;
 
@@ -36,7 +41,7 @@ public:
     MarkdownEmbeddedEditor(QWidget *parent=NULL);
     ~MarkdownEmbeddedEditor();
 
-    void set_options(MarkdownViewerOptions *options);
+    void set_options(mdview::MarkdownViewOptions *options);
     void set_theme(const QString& theme);
     void set_markdown_content(const QString& md);
     QString get_markdown_content() const;

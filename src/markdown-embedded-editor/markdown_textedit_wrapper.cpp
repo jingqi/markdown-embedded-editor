@@ -1,11 +1,11 @@
-
+﻿
 #include <assert.h>
 
 #include "markdown_textedit_wrapper.h"
 #include "markdown_embedded_editor.h"
 
 
-namespace organic
+namespace mdee
 {
 
 MarkdownTextEditWrapper::MarkdownTextEditWrapper(QWidget *parent)

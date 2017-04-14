@@ -1,23 +1,23 @@
-
+﻿
 #ifndef ___HEADFILE_8AC25BD6_22FC_42ED_A7CB_3329B6E452A7_
 #define ___HEADFILE_8AC25BD6_22FC_42ED_A7CB_3329B6E452A7_
 
-#include <markdown_viewer.h>
+#include <markdown_view.h>
 
 
-namespace organic
+namespace mdee
 {
 
 class MarkdownEmbeddedEditor;
 
-class MarkdownViewerWrapper : public MarkdownViewer
+class MarkdownViewWrapper : public mdview::MarkdownView
 {
     Q_OBJECT
 
     MarkdownEmbeddedEditor *_parent_editor = NULL;
 
 public:
-   MarkdownViewerWrapper(QWidget *parent);
+   MarkdownViewWrapper(QWidget *parent);
 
    void set_parent_editor(MarkdownEmbeddedEditor *editor);
 
