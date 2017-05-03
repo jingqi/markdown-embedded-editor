@@ -41,6 +41,9 @@ macx {
         hunspell/spellchecker_unix.cpp
 }
 
+SOURCES += \
+    $$files(controls/*.c*, true)
+
 # ui нд╪Ч
 FORMS += $$files(*.ui, true)
 
