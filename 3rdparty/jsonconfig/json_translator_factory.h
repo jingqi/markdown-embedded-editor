@@ -17,7 +17,7 @@
 #ifndef JSONTRANSLATORFACTORY_H
 #define JSONTRANSLATORFACTORY_H
 
-#include "jsontranslator.h"
+#include "json_translator.h"
 
 
 template <class T>

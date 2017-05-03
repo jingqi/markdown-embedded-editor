@@ -19,7 +19,7 @@
 
 #include "theme_collection.h"
 
-#include <jsonfile.h>
+#include "json_file.h"
 #include "json_theme_translator_factory.h"
 
 namespace mdee
