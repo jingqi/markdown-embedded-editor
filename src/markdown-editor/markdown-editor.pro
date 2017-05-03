@@ -23,7 +23,23 @@ qtHaveModule(webkitwidgets) {
 HEADERS += $$files(*.h*, true)
 
 # 源文件
-SOURCES += $$files(*.c*, true)
+SOURCES += \
+    $$files(*.c*) \
+    $$files(theme/*.c*, true) \
+    $$files(spellchecker/*.c*, true) \
+    $$files(snippets/*.c*, true) \
+    hunspell/spellchecker.cpp
+
+macx {
+    SOURCES += \
+        hunspell/spellchecker_macx.cpp
+} else:win32 {
+    SOURCES += \
+        hunspell/spellchecker_win.cpp
+} else {
+    SOURCES += \
+        hunspell/spellchecker_unix.cpp
+}
 
 # ui 文件
 FORMS += $$files(*.ui, true)
@@ -39,6 +55,10 @@ INCLUDEPATH += $$PWD/../../3rdparty/markdown-view.git/src/markdown-view
 LIBS += -L$$OUT_PWD/../../3rdparty/markdown-view.git/src/markdown-view$${OUT_TAIL}
 win32: LIBS += -lmarkdown-view1
 else: LIBS += -lmarkdown-view
+
+# hunspell
+INCLUDEPATH += $$PWD/../../3rdparty/hunspell.git/src
+LIBS += -L$$OUT_PWD/../hunspell$${OUT_TAIL} -lhunspell
 
 # jsonconfig
 INCLUDEPATH += $$PWD/../../3rdparty/jsonconfig

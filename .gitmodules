@@ -4,3 +4,6 @@
 [submodule "3rdparty/markdown-view.git"]
 	path = 3rdparty/markdown-view.git
 	url = https://github.com/jingqi/markdown-view.git
+[submodule "3rdparty/hunspell.git"]
+	path = 3rdparty/hunspell.git
+	url = https://github.com/hunspell/hunspell.git
