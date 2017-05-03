@@ -8,7 +8,8 @@ SUBDIRS += \
     $${MARKDOWN_TEXTEDIT_PRO} \
     $${MARKDOWN_VIEW_PRO} \
     markdown-embedded-editor \
-    test-markdown-embedded-editor
+    test-markdown-embedded-editor \
+    markdown-editor
 
 markdown-embedded-editor.depends = $${MARKDOWN_TEXTEDIT_PRO} $${MARKDOWN_VIEW_PRO}
 test-markdown-embedded-editor.depends = markdown-embedded-editor
